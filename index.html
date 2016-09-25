@@ -1,0 +1,733 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Large deformation modelling in geomechanics</title>
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/white.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!-- MathJax -->
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+    </script>
+
+    <!-- Script for Video play back on Slide for multiple videos-->
+    <script
+      src = "js/video.js">
+    </script>
+
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <!-- Section -->
+            <section>
+              <section>
+                <h2>Large deformation modelling in geomechanics</h2>
+                <h3>LBM-DEM, MPM, LEM, and Devops</h3>
+                <p>
+                  <br/>Krishna Kumar, <a href="mailto:kks32@cam.ac.uk">kks32@cam.ac.uk</a>
+                  <br/>University of Cambridge
+                </p>
+                <br/>
+                <div style="float: left; width: 100%;">
+                  <span style="float: left; width: 33%; text-align: center;">
+                    <img style="border:0;" src="images/themes/cued.png" width="100%">
+                  </span>
+                  <span style="float: left; width: 33%; text-align: center;">
+                    <img style="border:0;" src="images/themes/cb-geo-text-white.png" width="100%">
+                  </span>
+                  <span style="float: right; width: 33%; text-align: center;">
+                    <img style="border:0;" src="images/themes/berkeley.png" width="100%">
+                  </span>
+                </div>
+                <br/><br/>
+                <h4>University of California, Berkeley<br/>26 September 2016.</h4>
+              </section>
+
+              <!-- King's College Cambridge -->
+              <section data-background="images/kings.jpg" data-background-size="100%">
+              </section>
+
+              <!-- Multiscale approach -->
+              <section>
+                <h2>Multiscale modelling in geomechanics</h2>
+	        <figure>
+	          <img src="images/multiscale.png" width="100%">
+	        </figure>                  
+              </section>
+
+              <!-- Numerical methods -->
+              <section>
+                <h3>Cambridge-Berkeley computational geomechanics</h3>
+                <ul>
+                  <li> Lattice-Boltzmann + Discrete Element Method </li>
+                  <li> Finite Element Method - Thermo-Hydro Mechanical Coupling</li>
+                  <li> Material Point Method </li>
+                  <li> Lattice Element Method </li>
+                </ul>
+                <figure>
+                  <img src="images/themes/cb-geo.png" width ="100%">
+                  <figcaption><a href="http://www.cb-geo.com">View the CB-Geo website for 
+                      more information and software tools</a></figcaption>
+                </figure>
+              </section>
+            </section>
+
+
+            <!-- Dry v Fluid -->
+            <section>
+              <!-- Dissipation mechanism -->
+              <section>
+                <h2>Landslides: dissipation mechanism</h2>
+	              <img src="images/landslide.png" width="100%">
+              </section>
+
+              <!-- Experimental set-up -->
+              <section>
+                <h2>Collapse in fluid: Set-up</h2>
+                <img src = "images/geometry.png" width="100%" style="border:0">
+              </section>
+
+              <!-- LBM DEM a6 -->
+              <section>
+                <h3>LBM - DEM simulation of granular collapse in fluid</h3>
+                <br/>
+                <video  width="100%" controls loop>
+                  <source src="media/a6.webm" type="video/webm">
+  	            Your browser does not support the video tag.
+                </video>
+                <br/>
+                <br/>aspect ratio 'a' of 6 <br />
+              </section>
+
+              <!-- LBM MRT -->
+              <section>
+                <h2> Lattice Boltzmann - MRT </h2>
+                <div style="float: left; width: 47%;">
+                  <figure>
+	            <img src="images/lbm_fluid.png" width ="80%">
+	            <figcaption style = "font-size: 80%; text-align: center; "> Real Fluid vs LBM Idealisation </figcaption>
+                  </figure>
+                </div>
+                <div style="float: right; width: 47%;">
+                  <figure>
+		    <img src="images/d2q9.png" width = "80%">
+		    <figcaption style = "font-size: 80%; text-align: center;">
+                      LBM D2Q9 Model
+                    </figcaption>
+		  </figure>
+	        </div>
+	        <br/>
+	        <div style="clear: both; width: 85%">
+	          \[f_{i}(x + dx, t +\Delta t) - f_{i}(x, t) = -S_{\alpha i}(
+                  f_{i}(x, t) - f_{i} ^ {eq}(x, t))\]
+                </div>
+                <ul>
+                  <li>$S_{\alpha i}$ is the collisional matrix.</li>
+                  <li>Probability density of finding a particle : $f(x,\varepsilon, t) $,
+                    where, x is position, $\varepsilon$ is velocity, and t is time.</li>
+                </ul>
+                <div style="float: left; width: 47%;">
+                  <figure><img src = "images/stream.png" width = "80%">
+                    <figcaption style = "font-size: 80%; text-align: center;">
+                      Streaming
+                    </figcaption>
+                  </figure>
+                </div>
+                <div style="float: right; width: 47%;">
+                  <figure>
+                    <img src = "images/collision.png" width = "80%">
+                    <figcaption style = "font-size: 80%; text-align: center;">
+                      Collision
+                    </figcaption>
+                  </figure>
+                </div>
+              </section>
+
+              <!-- LBM-DEM fluid solid coupling -->
+              <section>
+   	        <h3>LBM-DEM fluid-solid coupling </h3>
+                <div style="float: left; width: 70%;">
+                  <figure>
+                    <img src="images/lbm-dem.png" width = "70%">
+                  </figure>
+	          <div class = "block">
+	            $$\Delta t_{s}=\frac{\Delta t}{\mathit{n}_{s}} \qquad (\mathit{n}_{s}=[\Delta t/ \Delta t_{D}]+1) $$
+	          </div>
+ 	          <ul>
+		    <li>At every fluid iteration, $\mathit{n}_{s}$ 
+		      sub-steps of DEM iterations are performed using the time step $\Delta t_{s}$. </li>
+		    <li>The hydrodynamic force is unchanged during the sub-cycling. </li>
+	          </ul>
+                </div>
+                <div style="float: right; width: 30%;">
+                  <video id="Kissing" width="50%" controls loop>
+                    <source src="media/tumble.webm" type="video/webm">
+                      Your browser does not support the video tag.
+                  </video>
+                </div>
+              </section>
+
+              <!-- Turulence modelling in LBM -->
+              <section>
+		<h2>LBM laminar & turbulent flows</h2>
+                <div style="float: left; width: 47%;">
+		  <figure>
+		    <img src="images/obstacle_lbm.png" width ="80%">
+		    <figcaption style = "font-size: 80%; text-align: center; ">
+                      Lattice Boltzmann
+                    </figcaption>
+		  </figure>
+		  <br />
+		  <figure>
+		    <img src="images/obstacle_cfd.png" width ="85%">
+		    <figcaption style = "font-size: 80%; text-align: center; ">
+                      CFD
+                    </figcaption>
+		  </figure>
+	        </div>
+                <div style="float: right; width: 47%;">
+	  	  <figure>
+	  	    <img src="images/poiseuille.png" width ="70%">
+	  	    <figcaption style = "font-size: 80%; text-align: center;">
+                      Poiseuille Flow
+                    </figcaption>
+	  	  </figure>
+                  <p> Smagorinsky model (LES):</p>
+                  $\nu_{s}(x,t)=(C_s \Delta)^2\sqrt{S_{ij}S_{ij}} \mbox{  ;  } S_{ij}=\frac{1}{2}(\frac{\partial u_i}{\partial x_j}+\frac{\partial u_j}{\partial x_i})$
+	  	  <video  id="Karman" width="120%" controls>
+	  	    <source src="media/karman.webm" type="video/webm">
+	  	      Your browser does not support the video tag.
+		  </video>
+		  <br/>Karman Vortex Street
+                </div>
+              </section>
+
+
+              <!-- LBM fluid collapse a0.4 and a4 -->
+              <section>
+                <h2>Granular collapse in fluid: Effect of aspect ratio</h2>
+                <div class="video">
+                  <br />
+                  <video id="a04" width="80%" >
+                    <source src="media/a04.webm" type="video/webm">
+                      Your browser does not support the video tag.
+                  </video>
+                  <br />aspect ratio 'a' of 0.4 <br />
+                  <video id="a4" width="78%" >
+                    <source src="media/a4.webm" type="video/webm">
+                      Your browser does not support the video tag.
+                  </video>
+                  <br />aspect ratio 'a' of 4 <br />
+                </div>
+                
+                <div class="media-buttons">
+                  <input type="button" id="play-button" onclick="PlayVideo('a04');PlayVideo('a4')"; this.disable=true; pause-button.disable=false; value="Play" />
+                  <input type="button" id="pause-button" onclick="PauseVideo('a04');PauseVideo('a4')"; this.disable=true; play-button.disable=false; value="Pause" />
+                </div>
+              </section>
+
+              <!-- Effect of permeability -->
+              <section>
+                <h2>Collapse in fluid: Effect of permeability</h2>
+                <video id="r07_r" width="80%" >
+                  <source src="media/a08_r07.webm" type="video/webm">
+  	            Your browser does not support the video tag.
+                </video>
+                <br />Reduction ‘R’=0.7r<br />
+                
+                <video id="r095_r" width="79%" >
+                  <source src="media/a08_r095.webm" type="video/webm">
+  	            Your browser does not support <th></th>e video tag.
+                </video>
+                <br />Reduction ‘R’=0.9r<br />
+
+                <div class="media-buttons">
+                  <input type="button" id="play-button" onclick="PlayVideo('r07_r');PlayVideo('r095_r')"; this.disable=true; pause-button.disable=false; value="Play" />
+                  <input type="button" id="pause-button" onclick="PauseVideo('r07_r');PauseVideo('r095_r')"; this.disable=true; play-button.disable=false; value="Pause" />
+                </div>
+              </section>
+
+
+              <!-- Hydrodynamic radius -->
+              <section>
+                <h2>Collapse in fluid: Effect of permeability</h2>
+                Dirichlet boundary conditions constrain the pressure/density at the boundaries (Zou and He, 1997)
+                <br />
+                $\rho_0=\sum_{a}f_{a} \mbox{ and } \textbf{u}=\frac{1}{\rho_0}\sum_{a}f_{a}$
+                <div style="float: left; width: 50%;">
+                  <figure style="margin-top:5%">
+                    <img src="images/hydrodynamic_radius.png" width ="60%">
+                    <figcaption style = "font-size: 80%; text-align: center; "> <br />Reduction in radius</figcaption>
+                  </figure>
+                </div>
+                <div style="float: right; width: 50%;">
+                  <figure>
+                    <img src="images/carman.png" width ="100%">
+                    <figcaption style = "font-size: 80%; text-align: center;">
+                      LBM-DEM Permeability and Theoretical Solutions
+                    </figcaption>
+                  </figure>
+                </div>
+              </section>
+
+              
+              <!-- Effect of permeability -->
+              <section>
+                <h2>Collapse in fluid: Effect of permeability</h2>
+                <video id="r07r" width="80%" >
+                  <source src="media/a08_r07.webm" type="video/webm">
+  	            Your browser does not support the video tag.
+                </video>
+                <br />Reduction ‘R’=0.7r<br />
+                
+                <video id="r095r" width="79%" >
+                  <source src="media/a08_r095.webm" type="video/webm">
+  	            Your browser does not support <th></th>e video tag.
+                </video>
+                <br />Reduction ‘R’=0.9r<br />
+
+                <div class="media-buttons">
+                  <input type="button" id="play-button" onclick="PlayVideo('r07r');PlayVideo('r095r')"; this.disable=true; pause-button.disable=false; value="Play" />
+                  <input type="button" id="pause-button" onclick="PauseVideo('r07r');PauseVideo('r095r')"; this.disable=true; play-button.disable=false; value="Pause" />
+                </div>
+              </section>
+
+              <!-- Effect of permeability -->
+              <section>
+                <h2>Collapse in fluid: Effect of permeability</h2>
+                  <figure>
+                    <img src="images/permeability_pwp.png" width="70%">
+                  </figure>
+              </section>
+
+              <!-- Effect of permeability -->
+              <section>
+                <h2>Effect of permeability: stress</h2>
+                  <figure>
+                    <img src="images/permeability_stress.png" width="55%">
+                  </figure>
+              </section>
+
+              <!-- Effect of permeability -->
+              <section>
+                <h2>Effect of permeability: runout</h2>
+                  <figure>
+                    <img src="images/runout_fluid.png" width="80%">
+                  </figure>
+              </section>
+              
+              <!-- Effect of permeability -->
+              <section>
+                <h2>Effect of permeability: kinetic energy</h2>
+                  <figure>
+                    <img src="images/ke_dry_fluid.png" width="70%">
+                  </figure>
+              </section>
+
+              
+              <!-- Effect of permeability -->
+              <section>
+                <h2>Effect of permeability: runout</h2>
+                  <figure>
+                    <img src="images/runout_energy.png" width="80%">
+                  </figure>
+              </section>
+
+              
+              <!-- CPU v GPU -->
+              <section>
+                <h3>CPU v GPU</h3>
+                <img src="images/cpu_gpu.png" width ="100%">
+              </section>
+
+              <!--LBM DEM 10,000 particles-->
+              <section>
+                <h3>LBM - DEM a = 0.8 & 10,000 partilces</h3>
+                <br/>
+                <video  width="100%" controls loop>
+                  <source src="media/a08_r095_7000.webm" type="video/webm">
+                    Your browser does not support the video tag.
+                </video>
+                <br/>
+                <ul>
+                  <li> LBM Nodes = 50 Million : DEM grains = 10000 discs </li>
+                  <li> Real-time = 2 seconds </li>
+                  <li> Run-time = 4 hours </li>
+                  <li> Speedup = 25x on a Tesla K20</li>
+              </section>
+
+              <!-- Developments and future plans -->
+              <section>
+                <h2>LBM - DEM: Road map</h2>
+                <div style="float: left; width: 60%;">
+                  <ul>
+                    <li>Generic templatised C++11/14 code</li>
+	            <li>Live rendering of VTK using GPUs (inprogress)</li>
+  	            <li>Multi-GPU support across nodes</li>
+	            <li>LBM:</li>
+	            <ul>
+                      <li>3D LBM model</li>
+                      <li>3D LB - DEM coupling</li>
+                      <li>Two-phase LBM fluid flow</li>
+	            </ul>
+	            <li>DEM:</li>
+	            <ul>
+                      <li>3D DEM with different shapes</li>
+	              <li>DEM simulations on GPU</li>
+	              <li>Contact models for DEM</li>
+	              <li>Special boundaries for DEM</li>
+                      <li>Simulating billion DEM particles</li>
+	            </ul>
+                  </ul>
+                </div>
+                <div style="float: right; width: 40%;">
+                  <video  width="100%" controls loop>
+                    <source src="media/3d-lbm-multiphase.webm" type="video/webm">
+  	              Your browser does not support the video tag.
+                  </video>
+                  <figure>
+                    <img src="images/dem.jpg" width ="100%">
+                    <figcaption>
+                      Simulating millions of DEM particles
+                    </figcaption>
+                  </figure>
+                </div>
+              </section>
+            </section>
+
+            
+            <!-- Material Point Method -->
+            <section>
+              <!-- Multiscale approach -->
+              <section>
+                <h2>Mesh-based vs Mesh-free techniques</h2>
+	        <figure>
+	          <img src="images/continuum_approaches.png" width="100%">
+	        </figure>                  
+              </section>
+              
+              <!-- Material Point Method -->
+              <section>
+                <h2>Material Point Method</h2>
+	        <figure>
+	          <img src="images/mpm_soil.png" width="100%">
+	          <figcaption style = "font-size: 80%; text-align: center; ">
+		    Porosity in MPM </figcaption>
+	        </figure>
+              </section>
+
+              <!-- Material Point Method -->
+              <section>
+                <h2>Material Point Method</h2>
+                <div style="float: left; width: 50%;">
+	          <figure>
+	            <img src="images/mpm_flowchart.png" width="100%">
+	          </figure>                  
+                </div>
+                <div style="float: right; width: 50%;">
+	          <figure>
+	            <img src="images/mpm_algorithm.png" width="100%">
+	          </figure>
+                </div>
+              </section>
+
+
+              <!-- Material Point Method -->
+              <section>
+                <h2>MPM v DEM column collapse</h2>
+                <div style="float: left; width: 50%;">
+	          <figure>
+	            <img src="images/a04f.png" width="100%">
+                    <figcaption>
+                      a = 0.4
+                    </figcaption>
+	          </figure>                  
+                </div>
+                <div style="float: right; width: 50%;">
+	          <figure>
+	            <img src="images/a6f.png" width="100%">
+                    <figcaption>
+                      a = 6
+                    </figcaption>
+	          </figure>
+                </div>
+              </section>
+              
+
+              <!-- DEM -->
+              <section>
+                <h2>DEM column collapse</h2>
+                <video  width="80%" controls loop>
+                  <source src="media/a6_dem.webm" type="video/webm">
+                    Your browser does not support the video tag.
+                </video>
+              </section>
+
+              <!-- MPM v DEM runout -->
+              <section>
+                <h2>MPM v DEM column collapse</h2>
+	        <figure>
+	          <img src="images/mpm_colum_runout.png" width="80%">
+                  <figcaption>
+                    Run-out v aspect ratio
+                  </figcaption>
+	        </figure>                  
+              </section>
+
+              
+              <!-- MPM slope -->
+              <section>
+                <h2>MPM slope failure</h2>
+                <video  width="100%" controls loop>
+                  <source src="media/mpm_100j.webm" type="video/webm">
+                    Your browser does not support the video tag.
+                </video>
+              </section>
+              
+             <!-- MPM v DEM runout -->
+              <section>
+                <h2>MPM v DEM run-out slope v collapse</h2>
+	        <figure>
+	          <img src="images/mpm_slope_column.png" width="90%">
+                  <figcaption>
+                    Run-out v aspect ratio
+                  </figcaption>
+	        </figure>                  
+              </section>
+            </section>
+
+            <!-- Lattice Element Method -->
+            <section>
+              <!-- Lattice Element Method -->
+              <section>
+                <h2>Lattice Element Method</h2>
+                <div style="float: left; width: 50%;">
+	          <figure>
+	            <img src="images/lem.png" style="width:80%">
+	          </figure>
+	        </div>	
+                <div style="float: right; width: 50%;">
+	          <figure>
+	            <img src="images/voro.png" width="100%">
+	          </figure>
+	        </div>
+              </section>
+
+              <!-- LEM Fluid coupling -->
+              <section>
+                <h2>Lattice Element Method - Fluid coupling</h2>
+                <div style="float: left; width: 50%;">
+                  <figure>
+	            <img src="images/pipe-network.png" style="width:80%">
+	          </figure>
+	        </div>	
+                <div style="float: right; width: 50%;">
+	          <ul>
+	            <li>First assume injection pressure $P_{in}$ and injection rate $Q_{in}$ at injection point</li>
+                    <li>Solve fluid pressure at each fluid node</li>
+                    <li>Convert pressure to node force and solve LEM to update fracture aperture</li>
+                    <li>Repeat the above process until convergence</li>
+	          </ul>
+	          $$q = - \frac{h^3}{12\mu}\frac{dp}{dx}$$
+  	        </div>
+              </section>
+
+              <!-- LEM Hydraulic fracturing -->
+              <section>
+                <h2>LEM hydraulic fracturing</h2>
+                <video  width="100%" controls loop>
+                  <source src="media/lem.webm" type="video/webm">
+                    Your browser does not support the video tag.
+                </video>
+                <p>John Wong, University of Cambridge</p>
+              </section>
+            </section>
+
+
+            
+            <!-- Software development -->
+            <section>
+              <!-- Software development -->
+              <section data-background="images/software_dev.jpg" data-background-size="80%">
+                <h3 style="color: yellow;">Software development</h3>
+                <ul style="color: yellow;">
+                  <li>Git</li>
+                  <li>Continous integration</li>
+                  <li>Unit testing</li>
+                  <li>Container technology</li>
+                </ul>
+              </section>
+              
+              <!-- Git -->
+              <section>
+                <h2>Git</h2>
+                <ul>
+                  <li>Git is a distributed version control system that keeps track of your changes.</li>
+                  <li>Git only stores the ‘delta’, i.e., only the difference between the previous
+                    version and the current version, so it doesn’t take up lots of valuable hard
+                    disk space. Git also compresses your file</li>
+                  <li>GitHub, GitLab, BitBucket, ... </li>
+                </ul>
+                <img src="images/git.png" width="80%">
+              </section>
+
+
+              
+              <!-- Continous Integration -->
+              <section>
+                <h2>Continous Integration</h2>
+                <div style="float: left; width: 50%;">
+                  <ul>
+                    <li>Builds: Multiple compilers and optimisations</li>
+                    <li>Unit testing</li>
+                    <li>Benchmarks</li>
+                    <li>Formatting - clangformat</li>
+                    <li>Coverage analysis</li>
+                    <li>Static analysis</li>
+                    <li>Continous delivery - Deployments</li>
+                  </ul>
+                </div>
+                <div style="float: right; width: 50%;">
+                  <img src="images/gitlab_ci.png" width="80%">
+                </div>                              
+                <img src="images/ci.png" width="80%">
+              </section>
+
+              
+              <!-- Unit testing -->
+              <section>
+                <h2>Unit testing</h2>
+                <div style="float: left; width: 40%;">
+                  <ul>
+                    <li>Test every function</li>
+                    <li>Test for all possible values</li>
+                    <li>C++ unit testing frameworks: </li>
+                     <ul>
+                       <li>Catch</li>
+                       <li>Google mock test</li>
+                       <li>Boost unit test</li>
+                     </ul>
+                  </ul>
+                  <p>
+                    <span class="fragment highlight-green">
+                      All tests passed (36 assertions in 3 test cases)
+                    </span>
+                  </p>
+                  <img src="images/jenkins.png" width="80%">
+                </div>
+                <div style="float: right; width: 60%;">
+                  <img src="images/unit_test.png" width="80%">
+                </div>
+              </section>
+
+              <!-- Containers -->
+              <section>
+                <h2>Docker containers</h2>
+                <ul>
+                  <li>Automates the deployment of applications by packaging an application with all of its dependencies into software containers.</li>
+                  <li>Docker containers wrap up a piece of software in a complete filesystem that contains everything it needs to run: code, runtime, system tools, system libraries – anything you can install on a server.</li>
+                  <li>This guarantees that it will always run the same - <strong>Research reproducability</strong></li>
+                  </ul>
+                <img src="images/docker-vm.png" width="60%">
+              </section>
+
+
+              <!-- Software development roadmap -->
+              <section>
+                <h3>Software development: Roadmap</h3>
+                <div style="float: left; width: 45%;">
+                  <ul>
+                    <li>Opensource development</li>
+                    <li>Modular code development</li>
+                    <li>HDF5</li>
+                    <li>In memory databases</li>
+                    <li>Apache Spark - MapReduce</li>
+                    <li>Version control</li>
+                    <li>Unit testing</li>
+                    <li>Continous integration and deployment</li>
+                    <li>Docker container - Kubernetes</li>
+                  </ul>
+                </div>
+                <div style="float: right; width: 55%;">
+                    <img src="images/software.png" width ="100%">
+                </div>
+              </section>
+            </section>
+
+            <!-- Summary -->
+            <section>
+              <!-- Thank you! -->
+              <section>
+                <h1> Thank you!! </h1>
+                <p>
+                  <br/> Krishna Kumar, <a href="mailto:kks32@cam.ac.uk">kks32@cam.ac.uk</a>
+                </p>
+                <br/>
+                <br/><br/>
+
+                <div style="float: left; width: 100%;">
+                  <span style="float: left; width: 33%; text-align: center;">
+                    <img style="border:0;" src="images/themes/cued.png" width="100%">
+                  </span>
+                  <span style="float: left; width: 33%; text-align: center;">
+                    <img style="border:0;" src="images/themes/cb-geo-text-white.png" width="100%">
+                  </span>
+                  <span style="float: right; width: 33%; text-align: center;">
+                    <img style="border:0;" src="images/themes/berkeley.png" width="100%">
+                  </span>
+                </div>
+              </section>
+            </section>
+            <!-- Special thanks to Chitra atthai! -->
+        </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+        // More info https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            history: true,
+            slideNumber: 'c/t',
+            // More info https://github.com/hakimel/reveal.js#dependencies
+            dependencies: [{
+                src: 'plugin/markdown/marked.js'
+            }, {
+                src: 'plugin/markdown/markdown.js'
+            }, {
+                src: 'plugin/notes/notes.js',
+                async: true
+            }, {
+                src: 'plugin/highlight/highlight.js',
+                async: true,
+                callback: function() {
+                    hljs.initHighlightingOnLoad();
+                }
+            }]
+        });
+    </script>
+</body>
+
+</html>
